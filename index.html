@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حاسبة المواريث الإسلامية</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- نظام الإشعارات -->
+    <div id="notification-container"></div>
+
+    <div class="container">
+        <header>
+            <div class="header-decoration"></div>
+            <h1>حـاسـبة المـواريث الإسلامية</h1>
+            <div class="quran-verse">﴿ لِلرِّجَالِ نَصِيبٌ مِّمَّا تَرَكَ الْوَالِدَانِ وَالْأَقْرَبُونَ وَلِلنِّسَاءِ نَصِيبٌ مِّمَّا تَرَكَ الْوَالِدَانِ وَالْأَقْرَبُونَ مِمَّا قَلَّ مِنْهُ أَوْ كَثُرَ ۚ نَصِيبًا مَّفْرُوضًا ﴾ <span class="sura-info">سورة النساء: آية ٧</span></div>
+        </header>
+
+        <div class="inheritance-calculator">
+            <div class="calculator-content">
+                <div class="instructions">
+                    <strong>حاسبة المواريث الإسلامية:</strong> تقوم هذه الحاسبة بتقسيم التركة حسب أحكام الشريعة الإسلامية بناءً على الورثة الموجودين. قم بإدخال قيمة التركة والورثة الموجودين على قيد الحياة.
+                </div>
+
+                <div class="deceased-gender">
+                    <h3><i class="fas fa-user-alt"></i> جنس المتوفي</h3>
+                    <div class="gender-selection">
+                        <div class="gender-option male-option">
+                            <input type="radio" id="male-deceased" name="deceased-gender" value="male" checked>
+                            <label for="male-deceased"><i class="fas fa-male"></i> ذكر (رجل)</label>
+                        </div>
+                        <div class="gender-option female-option">
+                            <input type="radio" id="female-deceased" name="deceased-gender" value="female">
+                            <label for="female-deceased"><i class="fas fa-female"></i> أنثى (امرأة)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="estate-input">
+                    <label for="estate-value">قيمة التركة (بالريال اليمني)</label>
+                    <input type="number" id="estate-value" placeholder="أدخل المبلغ الإجمالي للتركة بعد سداد الديون والوصايا" min="0">
+                    <div class="input-hint">يرجى إدخال قيمة التركة الصافية بعد خصم الديون وتنفيذ الوصايا (حتى ثلث التركة)</div>
+                </div>
+
+                <div class="heirs-selection">
+                    <h3>الورثة الموجودون</h3>
+
+                    <div class="heirs-group">
+                        <h4>الفروض (الزوجية)</h4>
+                        <div class="input-group">
+                            <input type="checkbox" id="husband" class="heir-checkbox">
+                            <label for="husband">الزوج</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="checkbox" id="wife" class="heir-checkbox">
+                            <label for="wife">الزوجة/الزوجات</label>
+                            <div class="count-input" id="wife-count-container" style="display: none;">
+                                <label for="wife-count">العدد:</label>
+                                <input type="number" id="wife-count" min="1" max="4" value="1">
+                                <div class="count-info">(الحد الأقصى 4 زوجات)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="heirs-group">
+                        <h4>الأصول</h4>
+                        <div class="input-group">
+                            <input type="checkbox" id="father" class="heir-checkbox">
+                            <label for="father">الأب</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="checkbox" id="mother" class="heir-checkbox">
+                            <label for="mother">الأم</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="checkbox" id="grandfather" class="heir-checkbox">
+                            <label for="grandfather">الجد (أبو الأب)</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="checkbox" id="grandmother-paternal" class="heir-checkbox">
+                            <label for="grandmother-paternal">الجدة (أم الأب)</label>
+                        </div>
+                        <div class="input-group">
+                            <input type="checkbox" id="grandmother-maternal" class="heir-checkbox">
+                            <label for="grandmother-maternal">الجدة (أم الأم)</label>
+                        </div>
+                    </div>
+
+                    <div class="heirs-group">
+                        <h4>الفروع</h4>
+                        <div class="input-group">
+                            <input type="checkbox" id="son" class="heir-checkbox">
+                            <label for="son">الإبن</label>
+                            <div class="count-input" id="son-count-container" style="display: none;">
+                                <label for="son-count">العدد:</label>
+                                <input type="number" id="son-count" min="1" value="1">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <input type="checkbox" id="daughter" class="heir-checkbox">
+                            <label for="daughter">البنت</label>
+                            <div class="count-input" id="daughter-count-container" style="display: none;">
+                                <label for="daughter-count">العدد:</label>
+                                <input type="number" id="daughter-count" min="1" value="1">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <input type="checkbox" id="son-of-son" class="heir-checkbox">
+                            <label for="son-of-son">إبن الإبن</label>
+                            <div class="count-input" id="son-of-son-count-container" style="display: none;">
+                                <label for="son-of-son-count">العدد:</label>
+                                <input type="number" id="son-of-son-count" min="1" value="1">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <input type="checkbox" id="daughter-of-son" class="heir-checkbox">
+                            <label for="daughter-of-son">بنت الإبن</label>
+                            <div class="count-input" id="daughter-of-son-count-container" style="display: none;">
+                                <label for="daughter-of-son-count">العدد:</label>
+                                <input type="number" id="daughter-of-son-count" min="1" value="1">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="heirs-group">
+                        <h4>الحواشي</h4>
+                        <div class="input-group">
+                            <input type="checkbox" id="brother" class="heir-checkbox">
+                            <label for="brother">الأخ الشقيق</label>
+                            <div class="count-input" id="brother-count-container" style="display: none;">
+                                <label for="brother-count">العدد:</label>
+                                <input type="number" id="brother-count" min="1" value="1">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <input type="checkbox" id="sister" class="heir-checkbox">
+                            <label for="sister">الأخت الشقيقة</label>
+                            <div class="count-input" id="sister-count-container" style="display: none;">
+                                <label for="sister-count">العدد:</label>
+                                <input type="number" id="sister-count" min="1" value="1">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <input type="checkbox" id="brother-paternal" class="heir-checkbox">
+                            <label for="brother-paternal">الأخ لأب</label>
+                            <div class="count-input" id="brother-paternal-count-container" style="display: none;">
+                                <label for="brother-paternal-count">العدد:</label>
+                                <input type="number" id="brother-paternal-count" min="1" value="1">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <input type="checkbox" id="sister-paternal" class="heir-checkbox">
+                            <label for="sister-paternal">الأخت لأب</label>
+                            <div class="count-input" id="sister-paternal-count-container" style="display: none;">
+                                <label for="sister-paternal-count">العدد:</label>
+                                <input type="number" id="sister-paternal-count" min="1" value="1">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <input type="checkbox" id="brother-maternal" class="heir-checkbox">
+                            <label for="brother-maternal">الأخ لأم</label>
+                            <div class="count-input" id="brother-maternal-count-container" style="display: none;">
+                                <label for="brother-maternal-count">العدد:</label>
+                                <input type="number" id="brother-maternal-count" min="1" value="1">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <input type="checkbox" id="sister-maternal" class="heir-checkbox">
+                            <label for="sister-maternal">الأخت لأم</label>
+                            <div class="count-input" id="sister-maternal-count-container" style="display: none;">
+                                <label for="sister-maternal-count">العدد:</label>
+                                <input type="number" id="sister-maternal-count" min="1" value="1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="calculate-inheritance" class="calculate-btn">حساب الميراث</button>
+
+                <div class="result-section">
+                    <h3>نتيجة التقسيم</h3>
+                    <div id="inheritance-results"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="inheritance-rules">
+            <h3>أهم قواعد الميراث في الإسلام</h3>
+            <ul>
+                <li>لا يرث القاتل</li>
+                <li>لا توارث بين مختلفي الدين</li>
+                <li>تقسم التركة بعد سداد الديون وتنفيذ الوصية (بحد أقصى الثلث لغير الوارث)</li>
+                <li>ترتيب الأولويات في الميراث: أصحاب الفروض، ثم العصبات، ثم ذوي الأرحام</li>
+                <li>للذكر مثل حظ الأنثيين في حالات التعصيب</li>
+                <li>يحجب الأقرب الأبعد في الغالب</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-decoration"></div>
+        <p>حاسبة المواريث الإسلامية - تمت برمجتها بواسطة محسن مبارك الكرفلة</p>
+
+        <div class="social-links">
+            <a href="#" title="تويتر"><i class="fab fa-twitter"></i></a>
+            <a href="#" title="فيسبوك"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://wa.me/775960910" target="_blank" title="واتساب" class="whatsapp-link"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" title="يوتيوب"><i class="fab fa-youtube"></i></a>
+            <a href="#" title="انستغرام"><i class="fab fa-instagram"></i></a>
+        </div>
+
+        <div class="footer-nav">
+            <a href="#">الصفحة الرئيسية</a>
+            <a href="#">أحكام المواريث</a>
+            <a href="#">حالات خاصة</a>
+            <a href="#">اتصل بنا</a>
+        </div>
+
+        <p class="disclaimer">هذه الحاسبة للتقدير فقط، ويُرجى الرجوع إلى أهل العلم المختصين للتحقق من صحة الحساب. تستند الحسابات إلى الأحكام الشرعية المتعارف عليها، ولكن قد تختلف في بعض التفاصيل حسب المذاهب الفقهية.</p>
+
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
